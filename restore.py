@@ -5,9 +5,20 @@ Description: Given a password, hugeText.txt, cutsList.txt, and initialIgnore.txt
 generate the proper mnemonic phrase.
 '''
 from progress.bar import Bar
+from art import *
+import getpass
 
 def main():
-    password = input("Please type in your password!\n")
+    print("---------------------------------------------")
+    tprint("CryptSafe", font="small")
+    print("Thank you for using CryptSafe!")
+    print("You are now in the Restore application.\n")
+    print("NOTICE: For your safety, please disconnect from the internet before running.\n")
+    print("IMPORTANT: Ensure that all three recovery files (hugeText.txt, initialIgnore.txt,cutsList.txt) are in the directory that you are running this application on.\n")
+    print("Thank you for your attention!\n")
+    print("DISCLAIMER: I am not responsible for the any losses or damages incurred as a result of your usage of this application!")
+    print("---------------------------------------------")
+    password = getpass.getpass("Please type in your password and hit enter!\n")
 
     # Import hugeText.txt
     with open("hugeText.txt","r") as hugeTextFile:
@@ -30,7 +41,7 @@ def main():
     solved = []
     # Process each cut
     for x in range(0,len(cutsList)):
-        bar = Bar(' Processing Cut List ' + str(x + 1), suffix='%(percent).1f%% - %(eta)ds', max = int(cutsList[x]))
+        bar = Bar(' Processing Cut List ' + str(x + 1) + "/" + str(len(cutsList)), suffix='%(percent).1f%% - %(eta)ds', max = int(cutsList[x]))
         #Take ascii of password character
         ascii = ord(password[x]) - 32
         for y in range(0, ascii):
@@ -44,7 +55,13 @@ def main():
             hugeText.pop(0)
             bar.next()
         bar.finish()
+    print("---------------------------------------------")
     print("Your Mnemonic Phrase: " + str(solved))
+    print("---------------------------------------------")
+    print("Thank you for using CryptSafe! Goodbye!")
+    print("---------------------------------------------")
+
+
 
 if __name__ == "__main__":
    main()
