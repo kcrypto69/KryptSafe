@@ -2,6 +2,15 @@
 
 Welcome to the KryptSafe Repository, where you will find a better way to store your crypto wallet mnemonic phrase.
 
+## Permanent Competition
+
+As a personal vote of confidence in KryptSafe, I have exposed one of the generated files, hugeText.txt, in this repository. This is one in four items required to restore the mnemonic phrase, the other three being my password, initialIgnore.txt, and cutsList.txt.
+
+If you can break into the wallet, you can have all the crypto in it:
+https://bscscan.com/address/0xE2e12F7483D3E341d7229b1aB7589D09E10654e1
+
+This competition will run perpetually.
+
 ## What is KryptSafe, how does it work (and why it's better)?
 
 KryptSafe is similar to existing mnemonic storage solutions in that you still have to store files, either on paper or in a hard-drive. Also, KryptSafe is similar to wallets in that you MUST own your password.
