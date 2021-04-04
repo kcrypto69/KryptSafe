@@ -64,7 +64,6 @@ def main():
         passwordLengthCheck = False
         while passwordLengthCheck == False:
             password = getpass.getpass("\nPlease type in a password and hit enter!\nThe length of your password must be at least the length of your mnemonic phrase!\n")
-            print(len(password))
             if(len(password) < len(mnemonic_list)):
                 print("ERROR: The length of your password must be at least the length of your mnemonic phrase!")
                 print("Please try again!")
