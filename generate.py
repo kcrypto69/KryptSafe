@@ -29,20 +29,52 @@ def main():
     print("DISCLAIMER: I am not responsible for the any losses or damages incurred as a result of your usage of this application!")
     print("---------------------------------------------")
 
-    mnemonic_list = input("Please type in your mnemonic phrase, with each word separated by a comma!\nFor example: cat,dog,mouse,rabbit,...\n").split(",")
-    print(mnemonic_list)
+    mnemonicConfirm = False
 
-    passwordMatch = False;
+    while mnemonicConfirm == False:
+
+        validMnemonic = False
+        while validMnemonic == False:
+            mnemonic_list = input("Please type in your mnemonic phrase, with each word separated by a comma!\nFor example: cat,dog,mouse,rabbit,...\n").split(",")
+            # Check whether each word exists in the wordlist. If not, the mnemonic is probably not BIP39 standard
+            # for w in range(0,len(mnemonic_list)):
+            #     for
+            with open("wordlist.txt","r") as bip39:
+                data = bip39.read().split("\n")
+                data.pop(-1)
+                invalidCount = 0
+                for y in range(0, len(mnemonic_list)):
+                    if mnemonic_list[y] not in data:
+                        print("\n" + str(mnemonic_list[y] + " is not a part of the BIP39 wordlist."))
+                        invalidCount += 1
+            if invalidCount == 0:
+                validMnemonic = True
+            else:
+                print("\nYour phrase is unsupported by KryptSafe!\n")
+
+        print("\nYour Mnemnoic Phrase is: " + str(mnemonic_list) + "\n")
+        mnemonic_confirm = input("Please type 'Confirm' followed by the enter key if this is correct.\nIf something is wrong, type anything else and press the enter key to retry!\n")
+
+        if mnemonic_confirm == "Confirm":
+            mnemonicConfirm = True
+
+    passwordMatch = False
 
     while passwordMatch == False:
-        password = getpass.getpass("Please type in a password and hit enter!\nThe length of your password must be at least the length of your mnemonic phrase!\n")
+        passwordLengthCheck = False
+        while passwordLengthCheck == False:
+            password = getpass.getpass("\nPlease type in a password and hit enter!\nThe length of your password must be at least the length of your mnemonic phrase!\n")
+            print(len(password))
+            if(len(password) < len(mnemonic_list)):
+                print("ERROR: The length of your password must be at least the length of your mnemonic phrase!")
+                print("Please try again!")
+            else:
+                passwordLengthCheck = True
         password2 = getpass.getpass("Please confirm your password\n")
         if(password == password2):
             passwordMatch = True;
         else:
             print("Passwords do not match. Please try again!")
-        
-    # Assume that the user has inputted a valid mnemonic_list for now
 
     # Second, generate initialIgnore
     initialIgnore = random.randint(10000, 50000)
